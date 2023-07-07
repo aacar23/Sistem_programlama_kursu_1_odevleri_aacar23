@@ -90,9 +90,8 @@ int main(int argc, char **argv)
             return 1;
         n = (int)temp;
     }
-    for (int index = optind;index < argc;index++){
+    for (int index = optind;index < argc;index++)
         if (process_file(*(argv + index), c_flag - n_flag == 1 ? C_FLAG : N_FLAG, n, v_flag))
             return 1;
-    }
     return 0;
 }
