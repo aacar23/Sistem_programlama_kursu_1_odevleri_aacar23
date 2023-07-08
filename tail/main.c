@@ -77,12 +77,10 @@ static int process_file(const char *file_name, int print_flag, int n, int v_flag
     if (v_flag == 1)
         printf("==>%s<==\n", file_name);
     if (print_flag == N_FLAG)
-        print_lines(file_name, n);
+        return print_lines(file_name, n);
     else if (print_flag == C_FLAG)
-        print_bytes(file_name, n);
-    else
-        return PROCESS_FAILURE;
-    return PROCESS_SUCCESS;
+        return print_bytes(file_name, n);
+    return PROCESS_FAILURE;
 }
 
 int main(int argc, char **argv)
