@@ -1,0 +1,93 @@
+wc_c utility by Ahmet ACAR
+
+This is simply a small students project that is made to understand the inner workings of wc which is a POSIX standard utility and its not the exact copy of the original wc utility but mostly similar.
+
+Explanation for punctuation in this help page:
+-- text between double quotes("text") means raw output
+-- text between angle brackets(<text>) means argument based output
+-- ... means any output
+-- ___ means any option
+
+
+****Options**********************************************************************************************************************
+
+This utility simply calculates these values and displays them by given option and in the relative order that has been given here:
+1. line count per file (calculated even though the option isn't given):
+    options: -l or --lines
+2. word count per file (calculated when the option is given):
+    options: -w or --words
+3. character count or bytes per file (calculated even though the option isn't given):
+    options: -c or --bytes
+4. max line length per file (calculated even though the option isn't given):
+    options : -L or --max-line-length
+
+Except for word count every other count is already calculated before options are processed.
+
+Options for retrieving help information are:
+1. --help : displays the help page and terminates the program
+2. --version : displays the version number and terminates the program
+
+In usage of --help and --version option both could be given but only the prior one will be processed and all the other options will be ignored.
+
+Same options could be given and the program would still run as expected.
+
+****Arguments********************************************************************************************************************
+
+If you enter more than one valid file name, other than argument outputs there will be a total output.
+
+For example with no options given the output would be like this:
+
+<line count> <word count> <byte or character count> <file name>
+<line count> <word count> <byte or character count> <file name>
+<total line count> <total word count> <total byte or character count> "total"
+
+On the other hand if you enter one argument total output wouldn't be displayed:
+
+<line count> <word count> <byte or character count> <file name>
+
+
+If you enter an invalid file name the program will simply terminate with return value 1.
+
+
+If you don't give any file arguments this error message will appear:
+    "no option has been given"
+
+Caution : Entering unseekable file streams like FIFOs, pipelines or sockets as arguments is undefined behavior.
+
+****Display**********************************************************************************************************************
+
+Displaying of the file counts is done by command strings optionless arguments' given order.
+
+Like so:
+
+./wc_c ___ file_1 file_2
+... "file_1"
+... "file_2
+... "total"
+
+./wc_c ___ file_3 file_4 file_1 file_2
+... "file_3"
+... "file_4"
+... "file_1"
+... "file_2"
+... "total"
+
+Given options counts is displayed in its own display index
+
+the order of display:
+<line count> <word count> <byte or character count> <max line length> <file name>
+
+Like so:
+
+./wc_c -c -l file
+<line count> <byte or character count> "file"
+
+./wc_c -w -l -c file
+<line count> <word count> <byte or character count> "file"
+
+./wc_c -L -w file
+<word count> <max line length> "file"
+
+Precision of strings of values are determined by biggest digit count among values.
+
+***********************************************************************************************************************************
