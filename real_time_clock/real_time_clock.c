@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	struct tm *(*converter)(const time_t *timer);
+	struct tm * (*converter)(const time_t *timer);
 	if (m_flag == 'l')
 		converter = localtime;
 	else if (m_flag == 'g')
