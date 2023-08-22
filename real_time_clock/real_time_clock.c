@@ -40,6 +40,11 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Please don't enter more than one flag\n");
 		return 1;
 	}
+	
+	if (optind != argc){
+		fprintf(stderr, "No argument required\n");
+		return 1;
+	}
 
 	struct tm * (*converter)(const time_t *timer);
 	if (m_flag == 'l')
