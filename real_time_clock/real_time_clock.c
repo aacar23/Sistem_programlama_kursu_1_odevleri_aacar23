@@ -1,8 +1,8 @@
 #include <time.h>
-#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <getopt.h>
+#include <unistd.h>
 
 #define TERM_ELEM {0, 0, 0, 0}
 
@@ -40,24 +40,20 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Please don't enter more than one flag\n");
 		return 1;
 	}
-	
+
 	if (optind != argc){
 		fprintf(stderr, "No argument required\n");
 		return 1;
 	}
 
-	struct tm * (*converter)(const time_t *timer);
-	if (m_flag == 'l')
-		converter = localtime;
-	else if (m_flag == 'g')
-		converter = gmtime;
-	else
-		converter = localtime;
+	struct tm * (*converter)(const time_t *timer) = m_flag == 'g' ? &gmtime : &localtime;
 
 	char str[21] = {0};
 	while (1){
 		memcpy(str, asctime(converter(&(time_t){time(NULL)})), 20);
 		printf("%s\r", str);
+		fflush(stdout);
+		sleep(1);
 	}
 
 	return 0;
