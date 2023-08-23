@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 
 	char str[21] = {0};
 	while (1){
-		memcpy(str, asctime(converter(&(time_t){time(NULL)})), 20);
+		memcpy(str, asctime((*converter)(&(time_t){time(NULL)})), 20);
 		printf("%s\r", str);
 		fflush(stdout);
 		sleep(1);
