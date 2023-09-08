@@ -1,7 +1,6 @@
 #include "GetOpt.h"
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #define NO_ARGUMENT (0)
@@ -101,8 +100,13 @@ INT GetOpt(int argc, char** argv, LPCSTR lpcszOptString)
 			return CUR_ARG_OPT_CHAR;
 
 		case NO_ARGUMENT:
+			if (strchr(CUR_ARG_OPT, ':')) {
+				if (bOptErr)
+					fprintf(stderr, "%c option cannot have an argument\n", CUR_ARG_OPT_CHAR);
+				return '!';
+			}
 			return CUR_ARG_OPT_CHAR;
-			
+
 		}
 	}
 	
