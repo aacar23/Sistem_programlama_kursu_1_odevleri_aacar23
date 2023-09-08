@@ -99,6 +99,10 @@ INT GetOpt(int argc, char** argv, LPCSTR lpcszOptString)
 			if (lpszOptArg)
 				++lpszOptArg;
 			return CUR_ARG_OPT_CHAR;
+
+		case NO_ARGUMENT:
+			return CUR_ARG_OPT_CHAR;
+			
 		}
 	}
 	
