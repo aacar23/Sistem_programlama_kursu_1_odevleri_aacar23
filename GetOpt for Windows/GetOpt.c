@@ -102,7 +102,7 @@ INT GetOpt(int argc, char** argv, LPCSTR lpcszOptString)
 		case NO_ARGUMENT:
 			if (strchr(CUR_ARG_OPT, ':')) {
 				if (bOptErr)
-					fprintf(stderr, "%c option cannot have an argument\n", CUR_ARG_OPT_CHAR);
+					fprintf(stderr, "%c option cannot have an argument\n", dwOptOpt = CUR_ARG_OPT_CHAR);
 				return '!';
 			}
 			return CUR_ARG_OPT_CHAR;
