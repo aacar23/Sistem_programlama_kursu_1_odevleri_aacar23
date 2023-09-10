@@ -13,7 +13,7 @@
 
 BOOL bOptErr = 1;
 LPSTR lpszOptArg;
-INT dwOptInd = 0;
+INT dwOptInd = 1;
 INT dwOptOpt;
 
 static void swap(void* vp1, void* vp2, size_t size)
@@ -63,10 +63,10 @@ static DWORD GetOptType(LPCSTR lpcszOptString, CHAR ch)
 
 INT GetOpt(int argc, char** argv, LPCSTR lpcszOptString)
 {
-	if (!dwOptInd)
+	if (dwOptInd == 1)
 		SortArguments(argc, argv);
 
-	if (!*(argv + ++dwOptInd))
+	if (!*(argv + dwOptInd++))
 		return -1;
 
 	if (!strcmp(*(argv + dwOptInd), "/"))
