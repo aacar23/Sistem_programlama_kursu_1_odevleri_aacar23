@@ -16,7 +16,7 @@ LPSTR lpszOptArg;
 INT dwOptInd = 1;
 INT dwOptOpt;
 
-static void swap(void* vp1, void* vp2, size_t size)
+static void Swap(void* vp1, void* vp2, size_t size)
 {
 	char* p1 = (char*)vp1;
 	char* p2 = (char*)vp2;
@@ -28,21 +28,21 @@ static void swap(void* vp1, void* vp2, size_t size)
 	}
 }
 
-static int cmp(LPCSTR lpcszStr1, LPCSTR lpcszStr2)
+static int Cmp(LPCSTR lpcszStr1, LPCSTR lpcszStr2)
 {
 
-	BOOL str1IsOpt = !!strchr(lpcszStr1, '/');
-	BOOL str2IsOpt = !!strchr(lpcszStr2, '/');
+	BOOL bStr1IsOpt = !!strchr(lpcszStr1, '/');
+	BOOL bStr2IsOpt = !!strchr(lpcszStr2, '/');
 
-	return !str1IsOpt && str2IsOpt;
+	return !bStr1IsOpt && bStr2IsOpt;
 }
 
 static VOID SortArguments(int argc, char** argv)
 {
 	for (int i = 1; i < argc - 1; ++i) {
 		for (int j = 1; j < argc - i; ++j)
-			if (cmp(*(argv + j), *(argv + j + 1)))
-				swap(argv + j, argv + j + 1, sizeof(char*));
+			if (Cmp(*(argv + j), *(argv + j + 1)))
+				Swap(argv + j, argv + j + 1, sizeof(char*));
 	}
 }
 
