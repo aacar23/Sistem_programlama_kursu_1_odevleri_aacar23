@@ -16,7 +16,7 @@ LPSTR lpszOptArg;
 INT dwOptInd = 1;
 INT dwOptOpt;
 
-static void Swap(void* vp1, void* vp2, size_t size)
+static VOID Swap(void* vp1, void* vp2, size_t size)
 {
 	char* p1 = (char*)vp1;
 	char* p2 = (char*)vp2;
