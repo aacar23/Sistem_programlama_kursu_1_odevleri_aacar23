@@ -63,22 +63,27 @@ static DWORD GetOptType(LPCSTR lpcszOptString, CHAR ch)
 
 INT GetOpt(int argc, char** argv, LPCSTR lpcszOptString)
 {
+	if (!*argv)
+		return -1;
+
 	if (dwOptInd == 1)
 		SortArguments(argc, argv);
 
-	if (!*(argv + dwOptInd++))
+	if (!*(argv + dwOptInd))
 		return -1;
 
-	if (!strcmp(*(argv + dwOptInd), "/"))
-		return -1;
+	if (!strcmp(*(argv + dwOptInd), "/")) {
+		fprintf(stderr, "Empty option /");
+		return '/';
+	}
 
 	if (*(*(argv + dwOptInd)) == '/') {
 		if (*(*(argv + dwOptInd) + 1) == ':') {
 			fprintf(stderr, "Forbidden option \"/:\" under any circumstances do not enter this option\n");
-			return -1;
+			return '\\';
 		}
-		switch (GetOptType(lpcszOptString, CUR_ARG_OPT_CHAR)) {
 
+		switch (GetOptType(lpcszOptString, CUR_ARG_OPT_CHAR)) {
 		case INVALID_OPTION:
 			if (bOptErr)
 				fprintf(stderr, "/%c is not a valid option.\n", dwOptOpt = CUR_ARG_OPT_CHAR);
@@ -91,13 +96,13 @@ INT GetOpt(int argc, char** argv, LPCSTR lpcszOptString)
 					fprintf(stderr, "Option /%c does not have an argument.\n", dwOptOpt = CUR_ARG_OPT_CHAR);
 				return ':';
 			}
-			return CUR_ARG_OPT_CHAR;
+			goto SUCCESS;
 
 		case OPTIONAL_ARGUMENT:
 			lpszOptArg = strchr(CUR_ARG_OPT, ':');
 			if (lpszOptArg)
 				++lpszOptArg;
-			return CUR_ARG_OPT_CHAR;
+			goto SUCCESS;
 
 		case NO_ARGUMENT:
 			if (strchr(CUR_ARG_OPT, ':')) {
@@ -105,11 +110,14 @@ INT GetOpt(int argc, char** argv, LPCSTR lpcszOptString)
 					fprintf(stderr, "%c option cannot have an argument\n", dwOptOpt = CUR_ARG_OPT_CHAR);
 				return '!';
 			}
-			return CUR_ARG_OPT_CHAR;
+			goto SUCCESS;
 
 		}
 	}
-	
-	return -1;
-}
 
+	return -1;
+
+	SUCCESS:
+	++dwOptInd;
+	return CUR_ARG_OPT_CHAR;
+}
