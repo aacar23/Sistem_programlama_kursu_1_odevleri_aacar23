@@ -16,13 +16,11 @@ BOOL SortFile(LPCSTR lpcszFileName, DWORD dwMergeFileCount)
 	if (!lphMergeFiles)
 		goto FAIL1;
 
-	if (!FillSortedTempFileArray(lphMergeFiles, hFile, dwMergeFileCount)) {
+	if (!FillSortedTempFileArray(lphMergeFiles, hFile, dwMergeFileCount))
 		goto FAIL2;
-	}
 
-	if (!SetBeginAllElementsInTempFileArray(lphMergeFiles, dwMergeFileCount)) {
+	if (!SetBeginAllElementsInTempFileArray(lphMergeFiles, dwMergeFileCount))
 		goto FAIL2;
-	}
 		
 
 	if (SetFilePointer(hFile, 0, NULL, FILE_BEGIN) == INVALID_SET_FILE_POINTER) {
@@ -30,9 +28,8 @@ BOOL SortFile(LPCSTR lpcszFileName, DWORD dwMergeFileCount)
 		goto FAIL2;
 	}
 
-	if (!MergeFiles(hFile, lphMergeFiles, dwMergeFileCount)) {
+	if (!MergeFiles(hFile, lphMergeFiles, dwMergeFileCount))
 		goto FAIL2;
-	}
 
 	DestroyTempFileArray(lphMergeFiles, dwMergeFileCount);
 	CloseHandle(hFile);
