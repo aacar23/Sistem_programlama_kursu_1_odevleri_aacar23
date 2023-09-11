@@ -9,11 +9,11 @@
 
 #define DEBUG
 
-#define MERGE_ELEM_FILE(lpObj)								((lpObj) -> hFile)
+#define MERGE_ELEM_FILE(lpObj)							((lpObj) -> hFile)
 #define MERGE_ELEM_CURRENT_VALUE(lpObj)						((lpObj) -> dwCurVal)
-#define MERGE_ELEM_IS_EOF(lpObj)							((lpObj) -> isEof)
+#define MERGE_ELEM_IS_EOF(lpObj)						((lpObj) -> isEof)
 #define SET_MERGE_ELEM_FILE(lpObj, val)						(((lpObj) -> hFile) = (val))
-#define SET_MERGE_ELEM_CURRENT_VALUE(lpObj, val)			(((lpObj) -> dwCurVal) = (val))
+#define SET_MERGE_ELEM_CURRENT_VALUE(lpObj, val)				(((lpObj) -> dwCurVal) = (val))
 #define SET_MERGE_ELEM_IS_EOF(lpObj, val)					(((lpObj) -> isEof) = (val))
 
 static LPMERGEELEM CreateMergeElemArray(LPHANDLE lphFileArray, DWORD dwFileCount)
