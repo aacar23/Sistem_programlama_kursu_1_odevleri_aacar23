@@ -8,8 +8,8 @@
 #define OPTIONAL_ARGUMENT (2)
 #define INVALID_OPTION (3)
 
-#define CUR_ARG_OPT_CHAR (*(*(argv + dwOptInd) + 1))
-#define CUR_ARG_OPT ((*(argv + dwOptInd)))
+#define CUR_ARG_OPT_CHAR 	(*(*(argv + dwOptInd) + 1))
+#define CUR_ARG_OPT 	 	((*(argv + dwOptInd)))
 
 BOOL bOptErr = 1;
 LPSTR lpszOptArg;
