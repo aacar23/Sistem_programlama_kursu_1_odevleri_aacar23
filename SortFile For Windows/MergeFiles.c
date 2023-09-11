@@ -4,7 +4,6 @@
 #include "ExitSys.h"
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <limits.h>
 
 #define DEBUG
@@ -62,9 +61,8 @@ static INT IterateMergeElemArray(HANDLE hFile, LPMERGEELEM lpMergeElems, DWORD d
 	DWORD dwGetSuccess;
 
 	DWORD dwNextCurValue = GetDword(MERGE_ELEM_FILE(lpMinMergeElem), &dwGetSuccess);
-	if (dwGetSuccess == GET_DWORD_FAILURE) {
+	if (dwGetSuccess == GET_DWORD_FAILURE)
 		return FALSE;
-	}
 
 	if (dwGetSuccess == GET_AND_PUT_DWORD_EOF)
 		SET_MERGE_ELEM_IS_EOF(lpMinMergeElem, TRUE);
@@ -77,15 +75,12 @@ static INT IterateMergeElemArray(HANDLE hFile, LPMERGEELEM lpMergeElems, DWORD d
 BOOL MergeFiles(HANDLE hFile, LPHANDLE lphMergeFiles, DWORD dwMergeFileCount)
 {
 	LPMERGEELEM lpMergeElemArray = CreateMergeElemArray(lphMergeFiles, dwMergeFileCount);
-	if (!lpMergeElemArray) {
-		printf("%d", __LINE__);
+	if (!lpMergeElemArray)
 		return FALSE;
-	}
 
 	for (INT iSuccess; (iSuccess = IterateMergeElemArray(hFile, lpMergeElemArray, dwMergeFileCount)) != EOF;)
-		if (iSuccess == FALSE) {
+		if (iSuccess == FALSE)
 			return FALSE;
-		}
 
 	free(lpMergeElemArray);
 
