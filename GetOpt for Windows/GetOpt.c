@@ -117,7 +117,8 @@ INT GetOpt(int argc, char** argv, LPCSTR lpcszOptString)
 
 	return -1;
 
-	SUCCESS:
+SUCCESS:
+	CHAR ch = CUR_ARG_OPT_CHAR;
 	++dwOptInd;
-	return CUR_ARG_OPT_CHAR;
+	return ch;
 }
