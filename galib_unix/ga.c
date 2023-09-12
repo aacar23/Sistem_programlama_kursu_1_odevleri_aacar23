@@ -20,7 +20,7 @@ void pos(int row, int col)
 
 void writec(int row, int col, int ch)
 {
-	writecc(row, col, ch, DEFAULT);
+	writecc(row, col, ch, COLOR_CODE(DEFAULT, FOREGROUND));
 }
 
 void writecc(int row, int col, int ch, int color)
@@ -30,7 +30,7 @@ void writecc(int row, int col, int ch, int color)
 
 void writes(int row, int col, const char *str)
 {
-	writesc(row, col, str, DEFAULT);
+	writesc(row, col, str, COLOR_CODE(DEFAULT, FOREGROUND));
 }
 
 void writesc(int row, int col, const char *str, int attr)
@@ -41,7 +41,7 @@ void writesc(int row, int col, const char *str, int attr)
 
 void fillc(int row, int col, int ch, int n)
 {
-	fillcc(row, col, ch, n, DEFAULT);
+	fillcc(row, col, ch, n, COLOR_CODE(DEFAULT, FOREGROUND));
 }
 
 void fillcc(int row, int col, int ch, int n, int attr)
@@ -53,7 +53,7 @@ void fillcc(int row, int col, int ch, int n, int attr)
 
 void vfill(int row, int col, int ch, int n)
 {
-	vfillc(row, col, ch, n, COLOR_ID(DEFAULT, FOREGROUND));
+	vfillc(row, col, ch, n, COLOR_CODE(DEFAULT, FOREGROUND));
 }
 
 void vfillc(int row, int col, int ch, int n, int attr)
