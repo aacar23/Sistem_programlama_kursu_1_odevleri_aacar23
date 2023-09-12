@@ -6,6 +6,13 @@
 #define MIN_ROW(row1, row2) ((row1) < (row2) ? (row1) : (row2))
 #define MIN_COL(col1, col2) ((col1) < (col2) ? (col1) : (col2))
 
+#define BOX_LL "\u2514" 
+#define BOX_V  "\u2502"
+#define BOX_H  "\u2500" 
+#define BOX_UL "\u250C"
+#define BOX_UR "\u2510"
+#define BOX_LR "\u2518"
+
 void pos(int row, int col)
 {
 	printf("\x1B[%d;%dH", row, col);

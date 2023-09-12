@@ -7,13 +7,6 @@
 
 enum COLOR {BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, PLACEHOLDER, DEFAULT};
 
-#define BOX_LL "\u2514" 
-#define BOX_V  "\u2502"
-#define BOX_H  "\u2500" 
-#define BOX_UL "\u250C"
-#define BOX_UR "\u2510"
-#define BOX_LR "\u2518"
-
 
 void pos(int row, int col);
 void writec(int row, int col, int ch);
