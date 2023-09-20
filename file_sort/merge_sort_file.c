@@ -103,7 +103,7 @@ static int forward_merge(FILE *dest_file, merger *mergers, size_t merger_count)
 static int merge_the_files(const char *dest_file_name, FILE * const *merge_files, size_t merge_file_count)
 {
     void (*set_error_str)(const char *additional_message) = &prepend_message_to_error_str;
-    FILE *dest_file = fopen(dest_file_name, "r+");
+    FILE *dest_file = fopen(dest_file_name, "rb+");
     if (!dest_file){
         set_error_str = &set_error_str_errno;
         goto FAIL_LEVEL_1;
@@ -131,6 +131,8 @@ static int merge_the_files(const char *dest_file_name, FILE * const *merge_files
 
 int merge_sort_file(const char *dest_file_name, size_t merge_file_count)
 {
+    int failed = 1;
+
     size_t dest_int_count;
 
     if (get_int_count(dest_file_name, &dest_int_count))
@@ -150,12 +152,12 @@ int merge_sort_file(const char *dest_file_name, size_t merge_file_count)
     if (res)
         goto FAIL_LEVEL_2;
 
-    destroy_merge_files(merge_files, merge_file_count);
-    return 0;
+    failed = 0;
 
     FAIL_LEVEL_2:
     destroy_merge_files(merge_files, merge_file_count);
     FAIL_LEVEL_1:
-    prepend_message_to_error_str(__func__);
-    return 1;
+    if (failed)
+        prepend_message_to_error_str(__func__);
+    return failed;
 }

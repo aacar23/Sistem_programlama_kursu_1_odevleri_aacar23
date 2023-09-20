@@ -62,7 +62,7 @@ FILE **create_merge_files(const char *source_file_name, size_t merge_file_count)
         return NULL;
     }
 
-    FILE *source_file = fopen(source_file_name, "r");
+    FILE *source_file = fopen(source_file_name, "rb");
     if (!source_file)
         goto FAIL_LEVEL_1;
 
