@@ -8,7 +8,7 @@
 
 #define ERROR_STR_LENGTH (1000)
 
-CHAR szErrorStr[ERROR_STR_LENGTH];
+static CHAR szErrorStr[ERROR_STR_LENGTH];
 
 VOID SetErrorStrLastError(LPCSTR lpcszMsg)
 {
