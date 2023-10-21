@@ -4,6 +4,7 @@
 #include <math.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <errno.h>
 
 
 
@@ -16,7 +17,10 @@ static void destroy_temp_files(temp_file *temp_files, ssize_t temp_file_count)
 {
     for (ssize_t i = 0;i < temp_file_count;++i){
         close((temp_files + i) -> file);
-        remove((temp_files + i) -> file_name);
+        if (remove((temp_files + i) -> file_name)){
+            fprintf(stderr, "%s: %s", __func__, strerror(errno));
+            exit(EXIT_FAILURE);
+        }
     }
     free(temp_files);
 }
